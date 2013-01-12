@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * ToolsTimeAgo
+ *
+ * Module formatting timestamps into human readable relative format (XY units ago)
+ * 
+ * @author Adam Kiss
+ * @version 1.0.0
+ * @since 2013-01-12
+ * @license WTFPL <http://www.wtfpl.net/>
+ * 
+ * @link http://www.adamkiss.com
+ */
+
+class ToolsTimeAgo implements Module {
+
+  /**
+   * Z informationz
+   *
+   * @return array
+   */
+  public static function getModuleInfo() {
+    return array(
+      'title' => 'TimeAgo',
+      'version' => 100, 
+      'summary' => 'Module formatting timestamps into human readable relative format (XY units ago)',
+      'href' => 'http://adamkiss.com'
+    );
+  }
+
+  private $formats_signular = array(
+    $this->_('%d second ago'),
+    $this->_('%d minute ago'),
+    $this->_('%d hour ago'),
+    $this->_('%d day ago'),
+    $this->_('%d week ago'),
+    $this->_('%d month ago'),
+    $this->_('%d year ago'),
+    $this->_('%d decade ago')
+  );
+
+  private $formats_plural = array(
+    $this->_('%d seconds ago'),
+    $this->_('%d minutes ago'),
+    $this->_('%d hours ago'),
+    $this->_('%d days ago'),
+    $this->_('%d weeks ago'),
+    $this->_('%d months ago'),
+    $this->_('%d years ago'),
+    $this->_('%d decades ago')
+  );
+
+  private $lengths = array("60","60","24","7","4.35","12","10");
+
+  public function format($timestamp){
+    $then = new DateTime($timestamp);
+    $now = new DateTime;
+    $difference = $now->diff($then)->s;
+
+    $smallest_length = 0;
+    while($difference > $this->lengths[$smallest_length])
+      $difference = round ($difference / $this->lengths[$smallest_length++]);
+
+    return sprintf(($difference==1) ?
+      $this->formats_singular[$smallest_length] :
+      $this->formats_plural[$smallest_length],
+      $difference
+    );
+  }
+}
