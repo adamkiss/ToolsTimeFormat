@@ -1,6 +1,8 @@
-# TimeAgo for ProcessWire
+# TimeAgo for ProcessWire v1.0.1
 
-This is a tiny ProcessWire Modules used for formatting times as 'X seconds ago', 'minutes ago'
+This is a tiny ProcessWire Modules used for formatting times as 'X seconds ago', 'minutes ago'. It goes up to decades.
+
+**Important note: this module uses 'soft limit' for units. That means that it will show '8 days ago' for 8 days, but '1 week ago' for 9 days, for instance. This will be configurable in one of the later releases.**
 
 ## Usage
 
@@ -14,5 +16,5 @@ It's very simple. Load module, pass the timestamp to `format` function. Bam, don
 ## Credits
 
 Created by [Adam Kiss](http://adamkiss.com) 2013  
-Calculation is a reformatted function found at [css-tricks.com](http://css-tricks.com/snippets/php/time-ago-function/)
+Calculation is a much improved function found at [css-tricks.com](http://css-tricks.com/snippets/php/time-ago-function/)
 License used is [WTFPL](http://www.wtfpl.net/)

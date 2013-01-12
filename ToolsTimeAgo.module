@@ -23,7 +23,7 @@ class ToolsTimeAgo extends WireData implements Module {
   public static function getModuleInfo() {
     return array(
       'title' => 'TimeAgo',
-      'version' => 100, 
+      'version' => 101, 
       'summary' => 'Module formatting timestamps into human readable relative format (XY units ago)',
       'href' => 'http://adamkiss.com'
     );
