@@ -13,7 +13,7 @@
  * @link http://www.adamkiss.com
  */
 
-class ToolsTimeAgo implements Module {
+class ToolsTimeAgo extends WireData implements Module {
 
   /**
    * Z informationz
@@ -29,43 +29,52 @@ class ToolsTimeAgo implements Module {
     );
   }
 
-  private $formats_signular = array(
-    $this->_('%d second ago'),
-    $this->_('%d minute ago'),
-    $this->_('%d hour ago'),
-    $this->_('%d day ago'),
-    $this->_('%d week ago'),
-    $this->_('%d month ago'),
-    $this->_('%d year ago'),
-    $this->_('%d decade ago')
+  public function init(){}
+  public function ___install() {
+    if(ProcessWire::versionMajor == 2 && ProcessWire::versionMinor < 2) {
+      throw new WireException("This module requires ProcessWire 2.2 or newer"); 
+    }
+  }
+
+  private $formats_singular = array(
+    '%d second ago',
+    '%d minute ago',
+    '%d hour ago',
+    '%d day ago',
+    '%d week ago',
+    '%d month ago',
+    '%d year ago',
+    '%d decade ago'
   );
 
   private $formats_plural = array(
-    $this->_('%d seconds ago'),
-    $this->_('%d minutes ago'),
-    $this->_('%d hours ago'),
-    $this->_('%d days ago'),
-    $this->_('%d weeks ago'),
-    $this->_('%d months ago'),
-    $this->_('%d years ago'),
-    $this->_('%d decades ago')
+    '%d seconds ago',
+    '%d minutes ago',
+    '%d hours ago',
+    '%d days ago',
+    '%d weeks ago',
+    '%d months ago',
+    '%d years ago',
+    '%d decades ago'
   );
 
   private $lengths = array("60","60","24","7","4.35","12","10");
+  private $limits = array("80","70","28","10","8","14","18");
 
   public function format($timestamp){
-    $then = new DateTime($timestamp);
+    $then = new DateTime((is_int($timestamp) ? "@{$timestamp}" : $timestamp));
     $now = new DateTime;
-    $difference = $now->diff($then)->s;
+    $difference = abs($now->getTimestamp() - $then->getTimestamp());
 
     $smallest_length = 0;
-    while($difference > $this->lengths[$smallest_length])
-      $difference = round ($difference / $this->lengths[$smallest_length++]);
+    while($smallest_length < 7 && $difference > $this->limits[$smallest_length]){
+      $difference = $difference / $this->lengths[$smallest_length++];
+    }
 
-    return sprintf(($difference==1) ?
+    return $this->_(sprintf(($difference < 1.5) ?
       $this->formats_singular[$smallest_length] :
       $this->formats_plural[$smallest_length],
-      $difference
-    );
+      (int)round($difference)
+    ));
   }
 }
