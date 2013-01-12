@@ -71,9 +71,9 @@ class ToolsTimeAgo extends WireData implements Module {
       $difference = $difference / $this->lengths[$smallest_length++];
     }
 
-    return $this->_(sprintf(($difference < 1.5) ?
-      $this->formats_singular[$smallest_length] :
-      $this->formats_plural[$smallest_length],
+    return sprintf(($difference < 1.5) ?
+      $this->_($this->formats_singular[$smallest_length]) :
+      $this->_($this->formats_plural[$smallest_length]),
       (int)round($difference)
     ));
   }
