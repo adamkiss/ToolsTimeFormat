@@ -1,4 +1,4 @@
-# TimeAgo for ProcessWire v1.0.1
+# TimeAgo for ProcessWire v1.0.2
 
 This is a tiny ProcessWire Modules used for formatting times as 'X seconds ago', 'minutes ago'. It goes up to decades.
 
@@ -12,6 +12,13 @@ It's very simple. Load module, pass the timestamp to `format` function. Bam, don
   $time_ago = $modules->get('ToolsTimeAgo');
   $posted = $time_ago->format($page->created);
 ```
+
+## History
+
+### v1.0.2 – 2013-01-12
+
+* fix – fixed translation possibilities (include only format string in `_()` call)
+
 
 ## Credits
 

@@ -6,7 +6,7 @@
  * Module formatting timestamps into human readable relative format (XY units ago)
  * 
  * @author Adam Kiss
- * @version 1.0.0
+ * @version 1.0.2
  * @since 2013-01-12
  * @license WTFPL <http://www.wtfpl.net/>
  * 
@@ -23,7 +23,7 @@ class ToolsTimeAgo extends WireData implements Module {
   public static function getModuleInfo() {
     return array(
       'title' => 'TimeAgo',
-      'version' => 101, 
+      'version' => 102, 
       'summary' => 'Module formatting timestamps into human readable relative format (XY units ago)',
       'href' => 'http://adamkiss.com'
     );
