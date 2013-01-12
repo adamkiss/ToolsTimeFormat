@@ -15,6 +15,6 @@ It's very simple. Load module, pass the timestamp to `format` function. Bam, don
 
 ## Credits
 
-Created by [Adam Kiss](http://adamkiss.com) 2013  
-Calculation is a much improved function found at [css-tricks.com](http://css-tricks.com/snippets/php/time-ago-function/)
-License used is [WTFPL](http://www.wtfpl.net/)
+* Created by [Adam Kiss](http://adamkiss.com) 2013
+* Calculation is a much improved function found at [css-tricks.com](http://css-tricks.com/snippets/php/time-ago-function/)
+* License used is [WTFPL](http://www.wtfpl.net/)
