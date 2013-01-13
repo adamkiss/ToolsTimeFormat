@@ -1,19 +1,19 @@
 <?php
 
 /**
- * ToolsTimeAgo
+ * ToolsTimeFormat
  *
  * Module formatting timestamps into human readable relative format (XY units ago)
  * 
  * @author Adam Kiss
- * @version 1.0.2
+ * @version 1.0.3
  * @since 2013-01-12
  * @license WTFPL <http://www.wtfpl.net/>
  * 
  * @link http://www.adamkiss.com
  */
 
-class ToolsTimeAgo extends WireData implements Module {
+class ToolsTimeFormat extends WireData implements Module {
 
   /**
    * Z informationz
@@ -22,8 +22,8 @@ class ToolsTimeAgo extends WireData implements Module {
    */
   public static function getModuleInfo() {
     return array(
-      'title' => 'TimeAgo',
-      'version' => 102, 
+      'title' => 'TimeFormat',
+      'version' => 103, 
       'summary' => 'Module formatting timestamps into human readable relative format (XY units ago)',
       'href' => 'http://adamkiss.com'
     );
@@ -61,7 +61,7 @@ class ToolsTimeAgo extends WireData implements Module {
   private $lengths = array("60","60","24","7","4.35","12","10");
   private $limits = array("80","70","28","10","8","14","18");
 
-  public function format($timestamp){
+  public function ago($timestamp){
     $then = new DateTime((is_int($timestamp) ? "@{$timestamp}" : $timestamp));
     $now = new DateTime;
     $difference = abs($now->getTimestamp() - $then->getTimestamp());
